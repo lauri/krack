@@ -1,0 +1,20 @@
+PATH
+  remote: .
+  specs:
+    krack (0.0.1)
+      multi_json
+      rack (~> 1.5.2)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    multi_json (1.5.1)
+    rack (1.5.2)
+    rake (10.0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  krack!
+  rake
