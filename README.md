@@ -1,29 +1,20 @@
 # Krack
 
-TODO: Write a gem description
+Simple JSON APIs on Rack. Like so:
 
-## Installation
+    # config.ru
+    
+    require 'krack'
+    
+    module Widgets
+      class Show
+        def respond
+          widget = Widget.find(params["id"])
+          {widget: widget.as_json}
+        end
+      end
+    end
 
-Add this line to your application's Gemfile:
-
-    gem 'krack'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install krack
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+    run Krack::Router.new {
+      get "/widgets/:id", Widgets::Show
+    }
