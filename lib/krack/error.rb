@@ -1,13 +1,12 @@
 module Krack
-  class Error < StandardError
-
+  class Error
     attr_accessor :status
 
     def initialize(status=500)
-      @status = status
+      @status = Rack::Utils::HTTP_STATUS_CODES.has_key?(status) ? status : 500
     end
 
-    def respond
+    def to_h
       {error: {status: status, message: Rack::Utils::HTTP_STATUS_CODES[status]}}
     end
   end

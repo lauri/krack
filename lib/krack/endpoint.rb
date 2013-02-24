@@ -31,11 +31,13 @@ module Krack
     def on_call; end
 
     def on_error(error)
-      Krack::Error.new(500).respond
+      on_halt(500)
     end
 
     def on_halt(halt)
-      Krack::Error.new(halt).respond
+      e = Krack::Error.new(halt)
+      response.status = e.status
+      e.to_h
     end
 
     def output(data)
