@@ -12,8 +12,8 @@ module Krack
       @response = Rack::Response.new([], 200, {"Content-Type" => "application/json"})
       @params   = env["krack.params"].merge(@request.params)
 
-      on_call
       data = begin
+        on_call
         respond_or_halt
       rescue
         on_error($!)
