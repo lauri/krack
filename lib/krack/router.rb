@@ -13,11 +13,11 @@ module Krack
         next unless match = env["PATH_INFO"].match(route)
 
         env["krack.params"] = Hash[match.names.zip(match.captures)]
-        return app.dup.call(env)
+        return app.call(env)
       end
       not_found
     end
-    
+
     def not_found
       [404, {"Content-Type" => "text/plain"}, ["Not found"]]
     end
