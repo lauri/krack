@@ -2,17 +2,15 @@ module Krack
   class Endpoint
     attr_reader :env, :request, :response, :params
 
-    class << self
-      def call(env)
-        new(env).call!
-      end
-    end
-
     def initialize(env)
       @env      = env
       @request  = Rack::Request.new(env)
       @response = Rack::Response.new([], 200, {"Content-Type" => "application/json"})
       @params   = env["krack.params"].merge(@request.params)
+    end
+
+    def self.call(env)
+      new(env).call!
     end
 
     def call!
@@ -21,7 +19,6 @@ module Krack
       rescue
         on_error($!)
       end
-
       response.write(output(data))
       response.finish
     end
