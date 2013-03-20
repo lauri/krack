@@ -36,12 +36,7 @@ module Krack
       # Allow optional trailing slash, add start/end tokens
       route = "\\A#{route}\\/?\\z"
 
-      # App can be either a Rack class or an instance of such, e.g.
-      # Endpoints::Deals::Near or lambda { |env| ... }
-      # What goes into @routes is something that responds to #call
-      app = to.respond_to?(:call) ? to : to.new
-
-      @routes << [verb, Regexp.new(route), app]
+      @routes << [verb, Regexp.new(route), to]
     end
   end
 end
