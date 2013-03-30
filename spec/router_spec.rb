@@ -9,6 +9,7 @@ describe Krack::Router do
       post "/deals/:one/:two",  lambda { |env| 4 }
       get "/users/best",        lambda { |env| 5 }
       get "/users/:id",         lambda { |env| 6 }
+      get "/widgets/:key",      lambda { |env| 7 }, :key => /\d{4}/
     }
   end
 
@@ -61,5 +62,15 @@ describe Krack::Router do
   it "should allow non-integer params" do
     env = {"REQUEST_METHOD" => "GET", "PATH_INFO" => "/users/worst"}
     @router.call(env).must_equal 6
+  end
+
+  it "should match a route if regex is given and matches" do
+    env = {"REQUEST_METHOD" => "GET", "PATH_INFO" => "/widgets/123x"}
+    @router.call(env).first.must_equal 404
+  end
+
+  it "should not match a route if regex is given and doesn't match" do
+    env = {"REQUEST_METHOD" => "GET", "PATH_INFO" => "/widgets/1234"}
+    @router.call(env).must_equal 7
   end
 end

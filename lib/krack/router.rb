@@ -25,18 +25,24 @@ module Krack
     # Defines methods for each HTTP verb. These methods just call #map
     # with the corresponding verb argument.
     %w[get post put delete patch].each do |verb|
-      define_method(verb) { |route, to| map(verb.upcase, route, to) }
+      define_method(verb) do |route, to, matchers={}|
+        map(verb.upcase, route, to, matchers)
+      end
     end
 
-    def map(verb, route, to)
-      # Converts route params to regex named groups, like so:
-      # "/deals/:id" -> "/deals/(?<id>\w+)"
-      route.gsub!(/:\w+/) { |param| "(?<#{param[1..-1]}>\\w+)" }
+    def map(verb, route, to, matchers={})
+      # Converts route params (`:id` in `/widgets/:id`) to regex named
+      # groups. For example, `:id` -> `/(?<id>\w+)/`
+      route.gsub!(/:\w+/) do |param|
+        param.slice!(0)
+        matcher = matchers[param.to_sym] || /\w+/
+        /(?<#{param}>#{matcher})/
+      end
 
       # Allow optional trailing slash, add start/end tokens
-      route = "\\A#{route}\\/?\\z"
+      route = /\A#{route}\/?\z/
 
-      @routes << [verb, Regexp.new(route), to]
+      @routes << [verb, route, to]
     end
   end
 end
