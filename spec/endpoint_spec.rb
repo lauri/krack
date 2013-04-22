@@ -46,4 +46,9 @@ describe TestEndpoint do
     json = assert_json(500)
     json["root"].must_be_nil
   end
+
+  it "should store exceptions in env hash" do
+    get "/", :error => "1"
+    last_request.env["rack.exception"].must_be_instance_of RuntimeError
+  end
 end

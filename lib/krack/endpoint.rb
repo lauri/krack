@@ -16,8 +16,9 @@ module Krack
     def call!
       data = begin
         respond_or_halt
-      rescue
-        on_error($!)
+      rescue => error
+        env["rack.exception"] = error
+        on_error(error)
       end
       response.write(output(data))
       response.finish
