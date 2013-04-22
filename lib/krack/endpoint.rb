@@ -29,6 +29,7 @@ module Krack
     end
 
     def on_error(error)
+      raise error if Krack.env?(:development)
       on_halt(500)
     end
 
