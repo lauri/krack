@@ -1,4 +1,4 @@
-# Krack
+## Krack
 
 Simple JSON APIs on Rack. Like so:
 
@@ -35,3 +35,6 @@ run Krack::Router.new {
   get "/widgets/:id", Widgets::Show
 }
 ```
+
+## License
+This content is released under the [MIT License](http://opensource.org/licenses/MIT).
