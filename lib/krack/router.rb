@@ -24,7 +24,7 @@ module Krack
 
     # Defines methods for each HTTP verb. These methods just call #map
     # with the corresponding verb argument.
-    %w[get post put delete patch].each do |verb|
+    %w[get post put delete patch options].each do |verb|
       define_method(verb) do |route, to, matchers={}|
         map(verb.upcase, route, to, matchers)
       end
