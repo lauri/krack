@@ -1,7 +1,7 @@
 # encoding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'krack/version'
+require "krack/version"
 
 Gem::Specification.new do |gem|
   gem.name          = "krack"
@@ -17,9 +17,9 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_runtime_dependency 'rack', '>= 1.4.5'
+  gem.add_runtime_dependency "rack", ">= 1.4.5"
 
-  gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'minitest'
-  gem.add_development_dependency 'rack-test'
+  gem.add_development_dependency "rake"
+  gem.add_development_dependency "minitest"
+  gem.add_development_dependency "rack-test"
 end

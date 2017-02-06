@@ -1,8 +1,8 @@
-require 'minitest/autorun'
-require 'minitest/spec'
-require 'rack/test'
+require "minitest/autorun"
+require "minitest/spec"
+require "rack/test"
 
-require_relative '../lib/krack'
+require_relative "../lib/krack"
 
 include Rack::Test::Methods
 

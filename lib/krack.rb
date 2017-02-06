@@ -1,10 +1,10 @@
-require 'rack'
-require 'json'
+require "rack"
+require "json"
 
-require 'krack/version'
-require 'krack/error'
-require 'krack/router'
-require 'krack/endpoint'
+require "krack/version"
+require "krack/error"
+require "krack/router"
+require "krack/endpoint"
 
 module Krack
   extend self

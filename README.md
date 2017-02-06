@@ -4,7 +4,7 @@ Simple JSON APIs on Rack. Like so:
 
 ```ruby
 # config.ru
-require 'krack'
+require "krack"
 
 class Widget # < "ORM"
   DB = {
