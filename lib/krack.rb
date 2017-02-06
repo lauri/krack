@@ -1,5 +1,5 @@
 require 'rack'
-require 'multi_json'
+require 'json'
 
 require 'krack/version'
 require 'krack/error'

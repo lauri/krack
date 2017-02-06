@@ -41,7 +41,7 @@ module Krack
     end
 
     def output(data)
-      MultiJson.dump(data, :time_format => :ruby)
+      JSON.generate(data)
     end
 
     def respond
